@@ -6,9 +6,8 @@ editor: visual
 theme : lux
 ---
 
-# Load packagesb
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 
 if(!require(pacman)) installed.packages("pacman")
@@ -52,7 +51,7 @@ average_life_value <-
 
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE, results ='hide'}
 # Load necessary libraries
 library(rnaturalearth)
 library(dplyr)
@@ -62,24 +61,27 @@ library(countrycode)
 # Get country shapes
 country_shapes <- rnaturalearth::ne_countries(returnclass = "sf")
 
+
 # Modify the country_shapes data frame
 country_shapes <- country_shapes %>%
   mutate(country_code = countrycode(name_long, "country.name", "iso3c"))
 
 # Create the plot
- ggplot(country_shapes) + geom_sf()
+ppp <- ggplot(country_shapes) + geom_sf()
 
 # View the modified country_shapes data frame
-country_shapes
+# country_shapes
 
 # Find the difference between the country codes
-setdiff(country_shapes$country_code, country_shapes$adm0_a3)
+# setdiff(country_shapes$country_code, country_shapes$adm0_a3)
 
 ```
 
-```{r}
+
+
+```{r message=FALSE, warning=FALSE, results='hide'}
 country_shapes <- rnaturalearth::ne_countries()
-ggplot(country_shapes) + geom_sf()
+ggg<- ggplot(country_shapes) + geom_sf()
 
    gap_07 <- gap_07 %>% 
    mutate(country_code = countrycode(country, 
@@ -103,7 +105,7 @@ ggplot(country_shapes) + geom_sf()
   
   
   gap_map_ggplotly <- ggplotly(gap_map, tooltip = "text")
-  gap_map_ggplotly
+ 
   
   
    
@@ -159,7 +161,7 @@ value_box(
 ```{r}
 value_box(
   title = "Average life Expectancy",
-  value = "average_life_value",
+  value = average_life_value,
   showcase = bsicons::bs_icon("graph-up"),
   theme = value_box_theme(bg = "#42f5e9"), 
   p(paste0("(", average_life_value, ")"))
